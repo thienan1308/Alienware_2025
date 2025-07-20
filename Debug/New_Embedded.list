@@ -21,31 +21,31 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
   8 .data         0000000c  20000800  08000d58  00002800  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          00000d08  2000080c  08000d64  0000280c  2**2
+  9 .bss          000000a8  2000080c  08000d64  0000280c  2**2
                   ALLOC
- 10 ._user_heap_stack 00000604  20001514  08000d64  00003514  2**0
+ 10 ._user_heap_stack 00000604  200008b4  08000d64  000028b4  2**0
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  0000280c  2**0
                   CONTENTS, READONLY
- 12 .debug_info   00003381  00000000  00000000  0000283c  2**0
+ 12 .debug_info   00003384  00000000  00000000  0000283c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 0000100a  00000000  00000000  00005bbd  2**0
+ 13 .debug_abbrev 00000ff2  00000000  00000000  00005bc0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00000430  00000000  00000000  00006bc8  2**3
+ 14 .debug_aranges 00000430  00000000  00000000  00006bb8  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_rnglists 000002ed  00000000  00000000  00006ff8  2**0
+ 15 .debug_rnglists 000002ed  00000000  00000000  00006fe8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  00015ebc  00000000  00000000  000072e5  2**0
+ 16 .debug_macro  00015f02  00000000  00000000  000072d5  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   0000676c  00000000  00000000  0001d1a1  2**0
+ 17 .debug_line   000067a8  00000000  00000000  0001d1d7  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    00084c46  00000000  00000000  0002390d  2**0
+ 18 .debug_str    00084c58  00000000  00000000  0002397f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  000a8553  2**0
+ 19 .comment      00000043  00000000  00000000  000a85d7  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00000db0  00000000  00000000  000a8598  2**2
+ 20 .debug_frame  00000db8  00000000  00000000  000a861c  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000069  00000000  00000000  000a9348  2**0
+ 21 .debug_line_str 00000069  00000000  00000000  000a93d4  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -665,12 +665,12 @@ void UART1_Init(){
 	__HAL_RCC_GPIOB_CLK_ENABLE();
  80005ae:	2300      	movs	r3, #0
  80005b0:	60bb      	str	r3, [r7, #8]
- 80005b2:	4b34      	ldr	r3, [pc, #208]	@ (8000684 <UART1_Init+0xdc>)
+ 80005b2:	4b31      	ldr	r3, [pc, #196]	@ (8000678 <UART1_Init+0xd0>)
  80005b4:	6b1b      	ldr	r3, [r3, #48]	@ 0x30
- 80005b6:	4a33      	ldr	r2, [pc, #204]	@ (8000684 <UART1_Init+0xdc>)
+ 80005b6:	4a30      	ldr	r2, [pc, #192]	@ (8000678 <UART1_Init+0xd0>)
  80005b8:	f043 0302 	orr.w	r3, r3, #2
  80005bc:	6313      	str	r3, [r2, #48]	@ 0x30
- 80005be:	4b31      	ldr	r3, [pc, #196]	@ (8000684 <UART1_Init+0xdc>)
+ 80005be:	4b2e      	ldr	r3, [pc, #184]	@ (8000678 <UART1_Init+0xd0>)
  80005c0:	6b1b      	ldr	r3, [r3, #48]	@ 0x30
  80005c2:	f003 0302 	and.w	r3, r3, #2
  80005c6:	60bb      	str	r3, [r7, #8]
@@ -678,29 +678,29 @@ void UART1_Init(){
 	//PB6 set moder6; PB7 moder7
 	//Set alternate function mode (set 10)
 	*GPIOB_MODER &= ~ (0b1111 << 12); //Clear bit PB6
- 80005ca:	4b2f      	ldr	r3, [pc, #188]	@ (8000688 <UART1_Init+0xe0>)
+ 80005ca:	4b2c      	ldr	r3, [pc, #176]	@ (800067c <UART1_Init+0xd4>)
  80005cc:	681b      	ldr	r3, [r3, #0]
- 80005ce:	4a2e      	ldr	r2, [pc, #184]	@ (8000688 <UART1_Init+0xe0>)
+ 80005ce:	4a2b      	ldr	r2, [pc, #172]	@ (800067c <UART1_Init+0xd4>)
  80005d0:	f423 4370 	bic.w	r3, r3, #61440	@ 0xf000
  80005d4:	6013      	str	r3, [r2, #0]
 	*GPIOB_MODER |=   (0b10  << 12) | (0b10 << 14); //Set alter func bit for PB6 and PB7
- 80005d6:	4b2c      	ldr	r3, [pc, #176]	@ (8000688 <UART1_Init+0xe0>)
+ 80005d6:	4b29      	ldr	r3, [pc, #164]	@ (800067c <UART1_Init+0xd4>)
  80005d8:	681b      	ldr	r3, [r3, #0]
- 80005da:	4a2b      	ldr	r2, [pc, #172]	@ (8000688 <UART1_Init+0xe0>)
+ 80005da:	4a28      	ldr	r2, [pc, #160]	@ (800067c <UART1_Init+0xd4>)
  80005dc:	f443 4320 	orr.w	r3, r3, #40960	@ 0xa000
  80005e0:	6013      	str	r3, [r2, #0]
 
 	//Cuz we use pin 6 and 7, so using alternate function low
 	*GPIOB_AFRL &= ~(0xFF << 24); //Clear bit AF7 from bit 24 and 28 for port B6 and B7
- 80005e2:	4b2a      	ldr	r3, [pc, #168]	@ (800068c <UART1_Init+0xe4>)
+ 80005e2:	4b27      	ldr	r3, [pc, #156]	@ (8000680 <UART1_Init+0xd8>)
  80005e4:	681b      	ldr	r3, [r3, #0]
- 80005e6:	4a29      	ldr	r2, [pc, #164]	@ (800068c <UART1_Init+0xe4>)
+ 80005e6:	4a26      	ldr	r2, [pc, #152]	@ (8000680 <UART1_Init+0xd8>)
  80005e8:	f023 437f 	bic.w	r3, r3, #4278190080	@ 0xff000000
  80005ec:	6013      	str	r3, [r2, #0]
 	*GPIOB_AFRL |=  (0b0111 << 24) | (0b0111 <<28); //Set bit AF7 for pin b6 and b7
- 80005ee:	4b27      	ldr	r3, [pc, #156]	@ (800068c <UART1_Init+0xe4>)
+ 80005ee:	4b24      	ldr	r3, [pc, #144]	@ (8000680 <UART1_Init+0xd8>)
  80005f0:	681b      	ldr	r3, [r3, #0]
- 80005f2:	4a26      	ldr	r2, [pc, #152]	@ (800068c <UART1_Init+0xe4>)
+ 80005f2:	4a23      	ldr	r2, [pc, #140]	@ (8000680 <UART1_Init+0xd8>)
  80005f4:	f043 43ee 	orr.w	r3, r3, #1996488704	@ 0x77000000
  80005f8:	6013      	str	r3, [r2, #0]
 		+DIV_Mantissa = 104
@@ -711,303 +711,303 @@ void UART1_Init(){
 	__HAL_RCC_USART1_CLK_ENABLE();	// the default RCC clock automatically provide 16Mhz
  80005fa:	2300      	movs	r3, #0
  80005fc:	607b      	str	r3, [r7, #4]
- 80005fe:	4b21      	ldr	r3, [pc, #132]	@ (8000684 <UART1_Init+0xdc>)
+ 80005fe:	4b1e      	ldr	r3, [pc, #120]	@ (8000678 <UART1_Init+0xd0>)
  8000600:	6c5b      	ldr	r3, [r3, #68]	@ 0x44
- 8000602:	4a20      	ldr	r2, [pc, #128]	@ (8000684 <UART1_Init+0xdc>)
+ 8000602:	4a1d      	ldr	r2, [pc, #116]	@ (8000678 <UART1_Init+0xd0>)
  8000604:	f043 0310 	orr.w	r3, r3, #16
  8000608:	6453      	str	r3, [r2, #68]	@ 0x44
- 800060a:	4b1e      	ldr	r3, [pc, #120]	@ (8000684 <UART1_Init+0xdc>)
+ 800060a:	4b1b      	ldr	r3, [pc, #108]	@ (8000678 <UART1_Init+0xd0>)
  800060c:	6c5b      	ldr	r3, [r3, #68]	@ 0x44
  800060e:	f003 0310 	and.w	r3, r3, #16
  8000612:	607b      	str	r3, [r7, #4]
  8000614:	687b      	ldr	r3, [r7, #4]
 	*UART1_BRR = (104 << 4) | (3 << 0); //baudrate register
- 8000616:	4b1e      	ldr	r3, [pc, #120]	@ (8000690 <UART1_Init+0xe8>)
+ 8000616:	4b1b      	ldr	r3, [pc, #108]	@ (8000684 <UART1_Init+0xdc>)
  8000618:	f240 6283 	movw	r2, #1667	@ 0x683
  800061c:	601a      	str	r2, [r3, #0]
 	//Set data size - word length that is bit 12 CR1
 	*UART1_CR1 |= (1 << 12); //need parity so choose "1", data bits + parity = 9 data bits
- 800061e:	4b1d      	ldr	r3, [pc, #116]	@ (8000694 <UART1_Init+0xec>)
+ 800061e:	4b1a      	ldr	r3, [pc, #104]	@ (8000688 <UART1_Init+0xe0>)
  8000620:	681b      	ldr	r3, [r3, #0]
- 8000622:	4a1c      	ldr	r2, [pc, #112]	@ (8000694 <UART1_Init+0xec>)
+ 8000622:	4a19      	ldr	r2, [pc, #100]	@ (8000688 <UART1_Init+0xe0>)
  8000624:	f443 5380 	orr.w	r3, r3, #4096	@ 0x1000
  8000628:	6013      	str	r3, [r2, #0]
 	//Set Parity bit 10 (PCE - parity control enable) of CR1
 	*UART1_CR1 |= (1 << 10);
- 800062a:	4b1a      	ldr	r3, [pc, #104]	@ (8000694 <UART1_Init+0xec>)
+ 800062a:	4b17      	ldr	r3, [pc, #92]	@ (8000688 <UART1_Init+0xe0>)
  800062c:	681b      	ldr	r3, [r3, #0]
- 800062e:	4a19      	ldr	r2, [pc, #100]	@ (8000694 <UART1_Init+0xec>)
+ 800062e:	4a16      	ldr	r2, [pc, #88]	@ (8000688 <UART1_Init+0xe0>)
  8000630:	f443 6380 	orr.w	r3, r3, #1024	@ 0x400
  8000634:	6013      	str	r3, [r2, #0]
 	//Enable transmitter
 	*UART1_CR1 |= (1 << 3);
- 8000636:	4b17      	ldr	r3, [pc, #92]	@ (8000694 <UART1_Init+0xec>)
+ 8000636:	4b14      	ldr	r3, [pc, #80]	@ (8000688 <UART1_Init+0xe0>)
  8000638:	681b      	ldr	r3, [r3, #0]
- 800063a:	4a16      	ldr	r2, [pc, #88]	@ (8000694 <UART1_Init+0xec>)
+ 800063a:	4a13      	ldr	r2, [pc, #76]	@ (8000688 <UART1_Init+0xe0>)
  800063c:	f043 0308 	orr.w	r3, r3, #8
  8000640:	6013      	str	r3, [r2, #0]
 	//Enable receiver - CR1 bit 3 TE(Trans enable), bit 2 RE (Receiver enable)
 	*UART1_CR1 |= (1 << 2);
- 8000642:	4b14      	ldr	r3, [pc, #80]	@ (8000694 <UART1_Init+0xec>)
+ 8000642:	4b11      	ldr	r3, [pc, #68]	@ (8000688 <UART1_Init+0xe0>)
  8000644:	681b      	ldr	r3, [r3, #0]
- 8000646:	4a13      	ldr	r2, [pc, #76]	@ (8000694 <UART1_Init+0xec>)
+ 8000646:	4a10      	ldr	r2, [pc, #64]	@ (8000688 <UART1_Init+0xe0>)
  8000648:	f043 0304 	orr.w	r3, r3, #4
  800064c:	6013      	str	r3, [r2, #0]
 	//Enable UART - CR1 bit 13 UE (USART enable)
 	*UART1_CR1 |= (1 << 13);
- 800064e:	4b11      	ldr	r3, [pc, #68]	@ (8000694 <UART1_Init+0xec>)
+ 800064e:	4b0e      	ldr	r3, [pc, #56]	@ (8000688 <UART1_Init+0xe0>)
  8000650:	681b      	ldr	r3, [r3, #0]
- 8000652:	4a10      	ldr	r2, [pc, #64]	@ (8000694 <UART1_Init+0xec>)
+ 8000652:	4a0d      	ldr	r2, [pc, #52]	@ (8000688 <UART1_Init+0xe0>)
  8000654:	f443 5300 	orr.w	r3, r3, #8192	@ 0x2000
  8000658:	6013      	str	r3, [r2, #0]
-
-#if 1
-	//Enable RXNE interrupt (enable su kien ngat), when RXNE is set, UART1 generate interrupt event send to nvic
-	*UART1_CR1 |= (1 << 5);
- 800065a:	4b0e      	ldr	r3, [pc, #56]	@ (8000694 <UART1_Init+0xec>)
- 800065c:	681b      	ldr	r3, [r3, #0]
- 800065e:	4a0d      	ldr	r2, [pc, #52]	@ (8000694 <UART1_Init+0xec>)
- 8000660:	f043 0320 	orr.w	r3, r3, #32
- 8000664:	6013      	str	r3, [r2, #0]
-	//NVIC approve interrupt event, which is send from UART1
 	//in vector table, USART1 at position number 37
 	uint32_t* NVIC_ISER1 = (uint32_t*)(0xE000E104); //Because the address of ISER0  is 0xE000E100 so ISER1 + theem 4 bit
- 8000666:	4b0c      	ldr	r3, [pc, #48]	@ (8000698 <UART1_Init+0xf0>)
- 8000668:	60fb      	str	r3, [r7, #12]
 	*NVIC_ISER1 |= 1 << (37 - 32);
- 800066a:	68fb      	ldr	r3, [r7, #12]
- 800066c:	681b      	ldr	r3, [r3, #0]
- 800066e:	f043 0220 	orr.w	r2, r3, #32
- 8000672:	68fb      	ldr	r3, [r7, #12]
- 8000674:	601a      	str	r2, [r3, #0]
 #else
 	//when RXNE is set, send signal to DMA2, DMA2 move data to RAM
 	uint32_t* DMA_CR3 = (uint32_t*)(0x40011014);
+ 800065a:	4b0c      	ldr	r3, [pc, #48]	@ (800068c <UART1_Init+0xe4>)
+ 800065c:	60fb      	str	r3, [r7, #12]
 	*DMA_CR3 |= (1 << 6);
+ 800065e:	68fb      	ldr	r3, [r7, #12]
+ 8000660:	681b      	ldr	r3, [r3, #0]
+ 8000662:	f043 0240 	orr.w	r2, r3, #64	@ 0x40
+ 8000666:	68fb      	ldr	r3, [r7, #12]
+ 8000668:	601a      	str	r2, [r3, #0]
 #endif
 }
+ 800066a:	bf00      	nop
+ 800066c:	3714      	adds	r7, #20
+ 800066e:	46bd      	mov	sp, r7
+ 8000670:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000674:	4770      	bx	lr
  8000676:	bf00      	nop
- 8000678:	3714      	adds	r7, #20
- 800067a:	46bd      	mov	sp, r7
- 800067c:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8000680:	4770      	bx	lr
- 8000682:	bf00      	nop
- 8000684:	40023800 	.word	0x40023800
- 8000688:	40020400 	.word	0x40020400
- 800068c:	40020420 	.word	0x40020420
- 8000690:	40011008 	.word	0x40011008
- 8000694:	4001100c 	.word	0x4001100c
- 8000698:	e000e104 	.word	0xe000e104
+ 8000678:	40023800 	.word	0x40023800
+ 800067c:	40020400 	.word	0x40020400
+ 8000680:	40020420 	.word	0x40020420
+ 8000684:	40011008 	.word	0x40011008
+ 8000688:	4001100c 	.word	0x4001100c
+ 800068c:	40011014 	.word	0x40011014
 
-0800069c <USART1_IRQHandler>:
+08000690 <USART1_IRQHandler>:
 }
 
 //Library of ST
 char recei_data[32];
 int rx_index = 0;
 void USART1_IRQHandler(){
- 800069c:	b580      	push	{r7, lr}
- 800069e:	af00      	add	r7, sp, #0
-	recei_data[rx_index++] = *UART1_DR;
- 80006a0:	4b1b      	ldr	r3, [pc, #108]	@ (8000710 <USART1_IRQHandler+0x74>)
- 80006a2:	6818      	ldr	r0, [r3, #0]
- 80006a4:	4b1b      	ldr	r3, [pc, #108]	@ (8000714 <USART1_IRQHandler+0x78>)
- 80006a6:	681b      	ldr	r3, [r3, #0]
- 80006a8:	1c5a      	adds	r2, r3, #1
- 80006aa:	491a      	ldr	r1, [pc, #104]	@ (8000714 <USART1_IRQHandler+0x78>)
- 80006ac:	600a      	str	r2, [r1, #0]
- 80006ae:	b2c1      	uxtb	r1, r0
- 80006b0:	4a19      	ldr	r2, [pc, #100]	@ (8000718 <USART1_IRQHandler+0x7c>)
- 80006b2:	54d1      	strb	r1, [r2, r3]
+ 8000690:	b580      	push	{r7, lr}
+ 8000692:	af00      	add	r7, sp, #0
+	recei_data[rx_index++] = *UART1_DR; //Khi DR doc du lieu, no se tu clear interrupt flag, no need code for clear flag
+ 8000694:	4b19      	ldr	r3, [pc, #100]	@ (80006fc <USART1_IRQHandler+0x6c>)
+ 8000696:	6818      	ldr	r0, [r3, #0]
+ 8000698:	4b19      	ldr	r3, [pc, #100]	@ (8000700 <USART1_IRQHandler+0x70>)
+ 800069a:	681b      	ldr	r3, [r3, #0]
+ 800069c:	1c5a      	adds	r2, r3, #1
+ 800069e:	4918      	ldr	r1, [pc, #96]	@ (8000700 <USART1_IRQHandler+0x70>)
+ 80006a0:	600a      	str	r2, [r1, #0]
+ 80006a2:	b2c1      	uxtb	r1, r0
+ 80006a4:	4a17      	ldr	r2, [pc, #92]	@ (8000704 <USART1_IRQHandler+0x74>)
+ 80006a6:	54d1      	strb	r1, [r2, r3]
 	if(strstr(recei_data, "LED ON") != NULL){
- 80006b4:	4919      	ldr	r1, [pc, #100]	@ (800071c <USART1_IRQHandler+0x80>)
- 80006b6:	4818      	ldr	r0, [pc, #96]	@ (8000718 <USART1_IRQHandler+0x7c>)
- 80006b8:	f000 fafb 	bl	8000cb2 <strstr>
- 80006bc:	4603      	mov	r3, r0
- 80006be:	2b00      	cmp	r3, #0
- 80006c0:	d00e      	beq.n	80006e0 <USART1_IRQHandler+0x44>
-		LEDblink(1, LED4_pin);
- 80006c2:	210c      	movs	r1, #12
- 80006c4:	2001      	movs	r0, #1
- 80006c6:	f7ff fe79 	bl	80003bc <LEDblink>
+ 80006a8:	4917      	ldr	r1, [pc, #92]	@ (8000708 <USART1_IRQHandler+0x78>)
+ 80006aa:	4816      	ldr	r0, [pc, #88]	@ (8000704 <USART1_IRQHandler+0x74>)
+ 80006ac:	f000 fb01 	bl	8000cb2 <strstr>
+ 80006b0:	4603      	mov	r3, r0
+ 80006b2:	2b00      	cmp	r3, #0
+ 80006b4:	d00c      	beq.n	80006d0 <USART1_IRQHandler+0x40>
+		LEDblink(1, LED5_pin);
+ 80006b6:	210e      	movs	r1, #14
+ 80006b8:	2001      	movs	r0, #1
+ 80006ba:	f7ff fe7f 	bl	80003bc <LEDblink>
+		//UART1_Trans_String("LED turned ON\r\n");
 		rx_index = 0;
- 80006ca:	4b12      	ldr	r3, [pc, #72]	@ (8000714 <USART1_IRQHandler+0x78>)
- 80006cc:	2200      	movs	r2, #0
- 80006ce:	601a      	str	r2, [r3, #0]
-		memset(rx_index, 0, sizeof(rx_index));
- 80006d0:	4b10      	ldr	r3, [pc, #64]	@ (8000714 <USART1_IRQHandler+0x78>)
- 80006d2:	681b      	ldr	r3, [r3, #0]
- 80006d4:	2204      	movs	r2, #4
- 80006d6:	2100      	movs	r1, #0
- 80006d8:	4618      	mov	r0, r3
- 80006da:	f000 fae2 	bl	8000ca2 <memset>
-		LEDblink(0, LED4_pin);
+ 80006be:	4b10      	ldr	r3, [pc, #64]	@ (8000700 <USART1_IRQHandler+0x70>)
+ 80006c0:	2200      	movs	r2, #0
+ 80006c2:	601a      	str	r2, [r3, #0]
+		memset(recei_data, 0, sizeof(recei_data));
+ 80006c4:	2220      	movs	r2, #32
+ 80006c6:	2100      	movs	r1, #0
+ 80006c8:	480e      	ldr	r0, [pc, #56]	@ (8000704 <USART1_IRQHandler+0x74>)
+ 80006ca:	f000 faea 	bl	8000ca2 <memset>
+		//UART1_Trans_String("LED turned OFF\r\n");
 		rx_index = 0;
-		memset(rx_index, 0, sizeof(rx_index));
+		memset(recei_data, 0, sizeof(recei_data));
 	}
 
 }
- 80006de:	e014      	b.n	800070a <USART1_IRQHandler+0x6e>
+ 80006ce:	e012      	b.n	80006f6 <USART1_IRQHandler+0x66>
 	else if(strstr(recei_data, "LED OFF") != NULL){
- 80006e0:	490f      	ldr	r1, [pc, #60]	@ (8000720 <USART1_IRQHandler+0x84>)
- 80006e2:	480d      	ldr	r0, [pc, #52]	@ (8000718 <USART1_IRQHandler+0x7c>)
- 80006e4:	f000 fae5 	bl	8000cb2 <strstr>
- 80006e8:	4603      	mov	r3, r0
- 80006ea:	2b00      	cmp	r3, #0
- 80006ec:	d00d      	beq.n	800070a <USART1_IRQHandler+0x6e>
-		LEDblink(0, LED4_pin);
- 80006ee:	210c      	movs	r1, #12
- 80006f0:	2000      	movs	r0, #0
- 80006f2:	f7ff fe63 	bl	80003bc <LEDblink>
+ 80006d0:	490e      	ldr	r1, [pc, #56]	@ (800070c <USART1_IRQHandler+0x7c>)
+ 80006d2:	480c      	ldr	r0, [pc, #48]	@ (8000704 <USART1_IRQHandler+0x74>)
+ 80006d4:	f000 faed 	bl	8000cb2 <strstr>
+ 80006d8:	4603      	mov	r3, r0
+ 80006da:	2b00      	cmp	r3, #0
+ 80006dc:	d00b      	beq.n	80006f6 <USART1_IRQHandler+0x66>
+		LEDblink(0, LED5_pin);
+ 80006de:	210e      	movs	r1, #14
+ 80006e0:	2000      	movs	r0, #0
+ 80006e2:	f7ff fe6b 	bl	80003bc <LEDblink>
 		rx_index = 0;
- 80006f6:	4b07      	ldr	r3, [pc, #28]	@ (8000714 <USART1_IRQHandler+0x78>)
- 80006f8:	2200      	movs	r2, #0
- 80006fa:	601a      	str	r2, [r3, #0]
-		memset(rx_index, 0, sizeof(rx_index));
- 80006fc:	4b05      	ldr	r3, [pc, #20]	@ (8000714 <USART1_IRQHandler+0x78>)
- 80006fe:	681b      	ldr	r3, [r3, #0]
- 8000700:	2204      	movs	r2, #4
- 8000702:	2100      	movs	r1, #0
- 8000704:	4618      	mov	r0, r3
- 8000706:	f000 facc 	bl	8000ca2 <memset>
+ 80006e6:	4b06      	ldr	r3, [pc, #24]	@ (8000700 <USART1_IRQHandler+0x70>)
+ 80006e8:	2200      	movs	r2, #0
+ 80006ea:	601a      	str	r2, [r3, #0]
+		memset(recei_data, 0, sizeof(recei_data));
+ 80006ec:	2220      	movs	r2, #32
+ 80006ee:	2100      	movs	r1, #0
+ 80006f0:	4804      	ldr	r0, [pc, #16]	@ (8000704 <USART1_IRQHandler+0x74>)
+ 80006f2:	f000 fad6 	bl	8000ca2 <memset>
 }
- 800070a:	bf00      	nop
- 800070c:	bd80      	pop	{r7, pc}
- 800070e:	bf00      	nop
- 8000710:	40011004 	.word	0x40011004
- 8000714:	20000848 	.word	0x20000848
- 8000718:	20000828 	.word	0x20000828
- 800071c:	08000d40 	.word	0x08000d40
- 8000720:	08000d48 	.word	0x08000d48
+ 80006f6:	bf00      	nop
+ 80006f8:	bd80      	pop	{r7, pc}
+ 80006fa:	bf00      	nop
+ 80006fc:	40011004 	.word	0x40011004
+ 8000700:	20000848 	.word	0x20000848
+ 8000704:	20000828 	.word	0x20000828
+ 8000708:	08000d40 	.word	0x08000d40
+ 800070c:	08000d48 	.word	0x08000d48
 
-08000724 <dma2_UART1_rx_Init>:
+08000710 <dma2_UART1_rx_Init>:
 
-char rx_buf[3268];
+char rx_buf[100];
 #define DMA2_ADDR 0x40026400
 void dma2_UART1_rx_Init(){
- 8000724:	b480      	push	{r7}
- 8000726:	b087      	sub	sp, #28
- 8000728:	af00      	add	r7, sp, #0
+ 8000710:	b480      	push	{r7}
+ 8000712:	b087      	sub	sp, #28
+ 8000714:	af00      	add	r7, sp, #0
 	__HAL_RCC_DMA2_CLK_ENABLE();
- 800072a:	2300      	movs	r3, #0
- 800072c:	603b      	str	r3, [r7, #0]
- 800072e:	4b28      	ldr	r3, [pc, #160]	@ (80007d0 <dma2_UART1_rx_Init+0xac>)
- 8000730:	6b1b      	ldr	r3, [r3, #48]	@ 0x30
- 8000732:	4a27      	ldr	r2, [pc, #156]	@ (80007d0 <dma2_UART1_rx_Init+0xac>)
- 8000734:	f443 0380 	orr.w	r3, r3, #4194304	@ 0x400000
- 8000738:	6313      	str	r3, [r2, #48]	@ 0x30
- 800073a:	4b25      	ldr	r3, [pc, #148]	@ (80007d0 <dma2_UART1_rx_Init+0xac>)
- 800073c:	6b1b      	ldr	r3, [r3, #48]	@ 0x30
- 800073e:	f403 0380 	and.w	r3, r3, #4194304	@ 0x400000
- 8000742:	603b      	str	r3, [r7, #0]
- 8000744:	683b      	ldr	r3, [r7, #0]
+ 8000716:	2300      	movs	r3, #0
+ 8000718:	603b      	str	r3, [r7, #0]
+ 800071a:	4b27      	ldr	r3, [pc, #156]	@ (80007b8 <dma2_UART1_rx_Init+0xa8>)
+ 800071c:	6b1b      	ldr	r3, [r3, #48]	@ 0x30
+ 800071e:	4a26      	ldr	r2, [pc, #152]	@ (80007b8 <dma2_UART1_rx_Init+0xa8>)
+ 8000720:	f443 0380 	orr.w	r3, r3, #4194304	@ 0x400000
+ 8000724:	6313      	str	r3, [r2, #48]	@ 0x30
+ 8000726:	4b24      	ldr	r3, [pc, #144]	@ (80007b8 <dma2_UART1_rx_Init+0xa8>)
+ 8000728:	6b1b      	ldr	r3, [r3, #48]	@ 0x30
+ 800072a:	f403 0380 	and.w	r3, r3, #4194304	@ 0x400000
+ 800072e:	603b      	str	r3, [r7, #0]
+ 8000730:	683b      	ldr	r3, [r7, #0]
 	//Using DMA2,  stream 2, channel 4 (table 28, ref manual for DMA)
 	uint32_t* DMA_S2CR = (uint32_t*)(DMA2_ADDR + 0x10 + 0x18 * 5); //(9.5.5 in ref manual)
- 8000746:	4b23      	ldr	r3, [pc, #140]	@ (80007d4 <dma2_UART1_rx_Init+0xb0>)
- 8000748:	617b      	str	r3, [r7, #20]
+ 8000732:	4b22      	ldr	r3, [pc, #136]	@ (80007bc <dma2_UART1_rx_Init+0xac>)
+ 8000734:	617b      	str	r3, [r7, #20]
 	*DMA_S2CR &= ~ (0b111 << 25);
- 800074a:	697b      	ldr	r3, [r7, #20]
- 800074c:	681b      	ldr	r3, [r3, #0]
- 800074e:	f023 6260 	bic.w	r2, r3, #234881024	@ 0xe000000
- 8000752:	697b      	ldr	r3, [r7, #20]
- 8000754:	601a      	str	r2, [r3, #0]
+ 8000736:	697b      	ldr	r3, [r7, #20]
+ 8000738:	681b      	ldr	r3, [r3, #0]
+ 800073a:	f023 6260 	bic.w	r2, r3, #234881024	@ 0xe000000
+ 800073e:	697b      	ldr	r3, [r7, #20]
+ 8000740:	601a      	str	r2, [r3, #0]
 	*DMA_S2CR |= (0b100 << 25); //Select channel 4 for stream 2
- 8000756:	697b      	ldr	r3, [r7, #20]
- 8000758:	681b      	ldr	r3, [r3, #0]
- 800075a:	f043 6200 	orr.w	r2, r3, #134217728	@ 0x8000000
- 800075e:	697b      	ldr	r3, [r7, #20]
- 8000760:	601a      	str	r2, [r3, #0]
+ 8000742:	697b      	ldr	r3, [r7, #20]
+ 8000744:	681b      	ldr	r3, [r3, #0]
+ 8000746:	f043 6200 	orr.w	r2, r3, #134217728	@ 0x8000000
+ 800074a:	697b      	ldr	r3, [r7, #20]
+ 800074c:	601a      	str	r2, [r3, #0]
 	*DMA_S2CR |= (1 << 10); //Enable memory increment mode
- 8000762:	697b      	ldr	r3, [r7, #20]
- 8000764:	681b      	ldr	r3, [r3, #0]
- 8000766:	f443 6280 	orr.w	r2, r3, #1024	@ 0x400
- 800076a:	697b      	ldr	r3, [r7, #20]
- 800076c:	601a      	str	r2, [r3, #0]
+ 800074e:	697b      	ldr	r3, [r7, #20]
+ 8000750:	681b      	ldr	r3, [r3, #0]
+ 8000752:	f443 6280 	orr.w	r2, r3, #1024	@ 0x400
+ 8000756:	697b      	ldr	r3, [r7, #20]
+ 8000758:	601a      	str	r2, [r3, #0]
 	*DMA_S2CR |= (1 << 8);
- 800076e:	697b      	ldr	r3, [r7, #20]
- 8000770:	681b      	ldr	r3, [r3, #0]
- 8000772:	f443 7280 	orr.w	r2, r3, #256	@ 0x100
- 8000776:	697b      	ldr	r3, [r7, #20]
- 8000778:	601a      	str	r2, [r3, #0]
+ 800075a:	697b      	ldr	r3, [r7, #20]
+ 800075c:	681b      	ldr	r3, [r3, #0]
+ 800075e:	f443 7280 	orr.w	r2, r3, #256	@ 0x100
+ 8000762:	697b      	ldr	r3, [r7, #20]
+ 8000764:	601a      	str	r2, [r3, #0]
 	*DMA_S2CR |= (1 << 4); //Enable transfer complete interrupt
- 800077a:	697b      	ldr	r3, [r7, #20]
- 800077c:	681b      	ldr	r3, [r3, #0]
- 800077e:	f043 0210 	orr.w	r2, r3, #16
- 8000782:	697b      	ldr	r3, [r7, #20]
- 8000784:	601a      	str	r2, [r3, #0]
+ 8000766:	697b      	ldr	r3, [r7, #20]
+ 8000768:	681b      	ldr	r3, [r3, #0]
+ 800076a:	f043 0210 	orr.w	r2, r3, #16
+ 800076e:	697b      	ldr	r3, [r7, #20]
+ 8000770:	601a      	str	r2, [r3, #0]
 	*DMA_S2CR |= (1 << 0); //Enable stream 2
- 8000786:	697b      	ldr	r3, [r7, #20]
- 8000788:	681b      	ldr	r3, [r3, #0]
- 800078a:	f043 0201 	orr.w	r2, r3, #1
- 800078e:	697b      	ldr	r3, [r7, #20]
- 8000790:	601a      	str	r2, [r3, #0]
+ 8000772:	697b      	ldr	r3, [r7, #20]
+ 8000774:	681b      	ldr	r3, [r3, #0]
+ 8000776:	f043 0201 	orr.w	r2, r3, #1
+ 800077a:	697b      	ldr	r3, [r7, #20]
+ 800077c:	601a      	str	r2, [r3, #0]
 
 	uint32_t* DMA_S2PAR = (uint32_t*)(DMA2_ADDR + 0x18 + 0x18 * 5); //(9.5.5 in ref manual)
- 8000792:	4b11      	ldr	r3, [pc, #68]	@ (80007d8 <dma2_UART1_rx_Init+0xb4>)
- 8000794:	613b      	str	r3, [r7, #16]
+ 800077e:	4b10      	ldr	r3, [pc, #64]	@ (80007c0 <dma2_UART1_rx_Init+0xb0>)
+ 8000780:	613b      	str	r3, [r7, #16]
 	*DMA_S2PAR = 0x40011004;
- 8000796:	693b      	ldr	r3, [r7, #16]
- 8000798:	4a10      	ldr	r2, [pc, #64]	@ (80007dc <dma2_UART1_rx_Init+0xb8>)
- 800079a:	601a      	str	r2, [r3, #0]
+ 8000782:	693b      	ldr	r3, [r7, #16]
+ 8000784:	4a0f      	ldr	r2, [pc, #60]	@ (80007c4 <dma2_UART1_rx_Init+0xb4>)
+ 8000786:	601a      	str	r2, [r3, #0]
 
 	uint32_t* DMA_S2NDTR = (uint32_t*)(DMA2_ADDR + 0x14 + 0x18 * 5); //(9.5.5 in ref manual)
- 800079c:	4b10      	ldr	r3, [pc, #64]	@ (80007e0 <dma2_UART1_rx_Init+0xbc>)
- 800079e:	60fb      	str	r3, [r7, #12]
-	*DMA_S2NDTR =  sizeof(rx_buf);
- 80007a0:	68fb      	ldr	r3, [r7, #12]
- 80007a2:	f640 42c4 	movw	r2, #3268	@ 0xcc4
- 80007a6:	601a      	str	r2, [r3, #0]
+ 8000788:	4b0f      	ldr	r3, [pc, #60]	@ (80007c8 <dma2_UART1_rx_Init+0xb8>)
+ 800078a:	60fb      	str	r3, [r7, #12]
+	*DMA_S2NDTR = 7;
+ 800078c:	68fb      	ldr	r3, [r7, #12]
+ 800078e:	2207      	movs	r2, #7
+ 8000790:	601a      	str	r2, [r3, #0]
 
 	uint32_t* DMA_S2M0AR = (uint32_t*)(DMA2_ADDR + 0x1C + 0x18 * 5); //(9.5.5 in ref manual)
- 80007a8:	4b0e      	ldr	r3, [pc, #56]	@ (80007e4 <dma2_UART1_rx_Init+0xc0>)
- 80007aa:	60bb      	str	r3, [r7, #8]
+ 8000792:	4b0e      	ldr	r3, [pc, #56]	@ (80007cc <dma2_UART1_rx_Init+0xbc>)
+ 8000794:	60bb      	str	r3, [r7, #8]
 	*DMA_S2M0AR = rx_buf;
- 80007ac:	4a0e      	ldr	r2, [pc, #56]	@ (80007e8 <dma2_UART1_rx_Init+0xc4>)
- 80007ae:	68bb      	ldr	r3, [r7, #8]
- 80007b0:	601a      	str	r2, [r3, #0]
+ 8000796:	4a0e      	ldr	r2, [pc, #56]	@ (80007d0 <dma2_UART1_rx_Init+0xc0>)
+ 8000798:	68bb      	ldr	r3, [r7, #8]
+ 800079a:	601a      	str	r2, [r3, #0]
 
-	uint32_t* NVIC_ISER1 = (uint32_t*)(0xE000E104);
- 80007b2:	4b0e      	ldr	r3, [pc, #56]	@ (80007ec <dma2_UART1_rx_Init+0xc8>)
- 80007b4:	607b      	str	r3, [r7, #4]
-	*NVIC_ISER1 |= (1 << 26);
- 80007b6:	687b      	ldr	r3, [r7, #4]
- 80007b8:	681b      	ldr	r3, [r3, #0]
- 80007ba:	f043 6280 	orr.w	r2, r3, #67108864	@ 0x4000000
- 80007be:	687b      	ldr	r3, [r7, #4]
- 80007c0:	601a      	str	r2, [r3, #0]
+	uint32_t* NVIC_ISER2 = (uint32_t*)(0xE000E108);
+ 800079c:	4b0d      	ldr	r3, [pc, #52]	@ (80007d4 <dma2_UART1_rx_Init+0xc4>)
+ 800079e:	607b      	str	r3, [r7, #4]
+	*NVIC_ISER2 |= 1 << (68-64);
+ 80007a0:	687b      	ldr	r3, [r7, #4]
+ 80007a2:	681b      	ldr	r3, [r3, #0]
+ 80007a4:	f043 0210 	orr.w	r2, r3, #16
+ 80007a8:	687b      	ldr	r3, [r7, #4]
+ 80007aa:	601a      	str	r2, [r3, #0]
 
 	/* receive: 7 bytes data
 	 * from: UART DR
 	 * to: receive_data (0x2000
 	 */
 }
- 80007c2:	bf00      	nop
- 80007c4:	371c      	adds	r7, #28
- 80007c6:	46bd      	mov	sp, r7
- 80007c8:	f85d 7b04 	ldr.w	r7, [sp], #4
- 80007cc:	4770      	bx	lr
- 80007ce:	bf00      	nop
- 80007d0:	40023800 	.word	0x40023800
- 80007d4:	40026488 	.word	0x40026488
- 80007d8:	40026490 	.word	0x40026490
- 80007dc:	40011004 	.word	0x40011004
- 80007e0:	4002648c 	.word	0x4002648c
- 80007e4:	40026494 	.word	0x40026494
- 80007e8:	2000084c 	.word	0x2000084c
- 80007ec:	e000e104 	.word	0xe000e104
+ 80007ac:	bf00      	nop
+ 80007ae:	371c      	adds	r7, #28
+ 80007b0:	46bd      	mov	sp, r7
+ 80007b2:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 80007b6:	4770      	bx	lr
+ 80007b8:	40023800 	.word	0x40023800
+ 80007bc:	40026488 	.word	0x40026488
+ 80007c0:	40026490 	.word	0x40026490
+ 80007c4:	40011004 	.word	0x40011004
+ 80007c8:	4002648c 	.word	0x4002648c
+ 80007cc:	40026494 	.word	0x40026494
+ 80007d0:	2000084c 	.word	0x2000084c
+ 80007d4:	e000e108 	.word	0xe000e108
 
-080007f0 <DMA2_Stream2_IRQHandler>:
+080007d8 <DMA2_Stream2_IRQHandler>:
 
 void DMA2_Stream2_IRQHandler(){
- 80007f0:	b480      	push	{r7}
- 80007f2:	af00      	add	r7, sp, #0
-	int x;
+ 80007d8:	b480      	push	{r7}
+ 80007da:	b083      	sub	sp, #12
+ 80007dc:	af00      	add	r7, sp, #0
+	__asm("NOP");
+ 80007de:	bf00      	nop
+	//clear the interrupt flag -> transfer complete interrupt (different to USART1, need to clear flag)
+	uint32_t* DMA_HIFCR = (uint32_t*)(DMA2_ADDR + 0x0C);
+ 80007e0:	4b06      	ldr	r3, [pc, #24]	@ (80007fc <DMA2_Stream2_IRQHandler+0x24>)
+ 80007e2:	607b      	str	r3, [r7, #4]
+	*DMA_HIFCR |= 1 << 11; //bit 11
+ 80007e4:	687b      	ldr	r3, [r7, #4]
+ 80007e6:	681b      	ldr	r3, [r3, #0]
+ 80007e8:	f443 6200 	orr.w	r2, r3, #2048	@ 0x800
+ 80007ec:	687b      	ldr	r3, [r7, #4]
+ 80007ee:	601a      	str	r2, [r3, #0]
+
 }
- 80007f4:	bf00      	nop
- 80007f6:	46bd      	mov	sp, r7
- 80007f8:	f85d 7b04 	ldr.w	r7, [sp], #4
- 80007fc:	4770      	bx	lr
-	...
+ 80007f0:	bf00      	nop
+ 80007f2:	370c      	adds	r7, #12
+ 80007f4:	46bd      	mov	sp, r7
+ 80007f6:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 80007fa:	4770      	bx	lr
+ 80007fc:	4002640c 	.word	0x4002640c
 
 08000800 <function>:
 //		LEDblink(0, LED5_pin);
@@ -1070,27 +1070,27 @@ int main(){
 	Timer_init();
  8000852:	f7ff fe7b 	bl	800054c <Timer_init>
 	dma2_UART1_rx_Init();
- 8000856:	f7ff ff65 	bl	8000724 <dma2_UART1_rx_Init>
+ 8000856:	f7ff ff5b 	bl	8000710 <dma2_UART1_rx_Init>
 //			LEDblink(1, LED3_pin);
 //		else if (UART1_Receive_1byte() == 'b')
 //			LEDblink(0, LED3_pin);  //cau 1
 
 
-		LEDblink(1, LED3_pin);
- 800085a:	210d      	movs	r1, #13
+		LEDblink(1, LED4_pin);
+ 800085a:	210c      	movs	r1, #12
  800085c:	2001      	movs	r0, #1
  800085e:	f7ff fdad 	bl	80003bc <LEDblink>
 		HAL_Delay(1000);
  8000862:	f44f 707a 	mov.w	r0, #1000	@ 0x3e8
  8000866:	f000 f913 	bl	8000a90 <HAL_Delay>
-		LEDblink(0, LED3_pin);
- 800086a:	210d      	movs	r1, #13
+		LEDblink(0, LED4_pin);
+ 800086a:	210c      	movs	r1, #12
  800086c:	2000      	movs	r0, #0
  800086e:	f7ff fda5 	bl	80003bc <LEDblink>
 		HAL_Delay(1000);
  8000872:	f44f 707a 	mov.w	r0, #1000	@ 0x3e8
  8000876:	f000 f90b 	bl	8000a90 <HAL_Delay>
-		LEDblink(1, LED3_pin);
+		LEDblink(1, LED4_pin);
  800087a:	bf00      	nop
  800087c:	e7ed      	b.n	800085a <main+0x26>
  800087e:	bf00      	nop
@@ -1434,7 +1434,7 @@ LoopFillZerobss:
   ldr r2, =_sbss
  80009a0:	2000080c 	.word	0x2000080c
   ldr r4, =_ebss
- 80009a4:	20001514 	.word	0x20001514
+ 80009a4:	200008b4 	.word	0x200008b4
 
 080009a8 <ADC_IRQHandler>:
  * @retval None       
@@ -1597,7 +1597,7 @@ __weak void HAL_IncTick(void)
  8000a6c:	4770      	bx	lr
  8000a6e:	bf00      	nop
  8000a70:	20000808 	.word	0x20000808
- 8000a74:	20001510 	.word	0x20001510
+ 8000a74:	200008b0 	.word	0x200008b0
 
 08000a78 <HAL_GetTick>:
   * @note This function is declared as __weak to be overwritten in case of other 
@@ -1617,7 +1617,7 @@ __weak uint32_t HAL_GetTick(void)
  8000a84:	f85d 7b04 	ldr.w	r7, [sp], #4
  8000a88:	4770      	bx	lr
  8000a8a:	bf00      	nop
- 8000a8c:	20001510 	.word	0x20001510
+ 8000a8c:	200008b0 	.word	0x200008b0
 
 08000a90 <HAL_Delay>:
   *       implementations in user file.

@@ -5,6 +5,7 @@
 #include"UART.h"
 #include"SPI.h"
 #include"Flash_Eraser.h"
+#include"string.h"
 int cnt = 1000;
 
 
@@ -97,9 +98,9 @@ int main(){
 //			LEDblink(0, LED3_pin);  //cau 1
 
 
-		LEDblink(1, LED3_pin);
+		LEDblink(1, LED4_pin);
 		HAL_Delay(1000);
-		LEDblink(0, LED3_pin);
+		LEDblink(0, LED4_pin);
 		HAL_Delay(1000);
 
 

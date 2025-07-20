@@ -63,7 +63,7 @@ void UART1_Init(){
 	//Enable UART - CR1 bit 13 UE (USART enable)
 	*UART1_CR1 |= (1 << 13);
 
-#if 1
+#if 0
 	//Enable RXNE interrupt (enable su kien ngat), when RXNE is set, UART1 generate interrupt event send to nvic
 	*UART1_CR1 |= (1 << 5);
 	//NVIC approve interrupt event, which is send from UART1
@@ -106,21 +106,23 @@ char UART1_Receive_1byte(){
 char recei_data[32];
 int rx_index = 0;
 void USART1_IRQHandler(){
-	recei_data[rx_index++] = *UART1_DR;
+	recei_data[rx_index++] = *UART1_DR; //Khi DR doc du lieu, no se tu clear interrupt flag, no need code for clear flag
 	if(strstr(recei_data, "LED ON") != NULL){
-		LEDblink(1, LED4_pin);
+		LEDblink(1, LED5_pin);
+		//UART1_Trans_String("LED turned ON\r\n");
 		rx_index = 0;
-		memset(rx_index, 0, sizeof(rx_index));
+		memset(recei_data, 0, sizeof(recei_data));
 	}
 	else if(strstr(recei_data, "LED OFF") != NULL){
-		LEDblink(0, LED4_pin);
+		LEDblink(0, LED5_pin);
+		//UART1_Trans_String("LED turned OFF\r\n");
 		rx_index = 0;
-		memset(rx_index, 0, sizeof(rx_index));
+		memset(recei_data, 0, sizeof(recei_data));
 	}
 
 }
 
-char rx_buf[3268];
+char rx_buf[100];
 #define DMA2_ADDR 0x40026400
 void dma2_UART1_rx_Init(){
 	__HAL_RCC_DMA2_CLK_ENABLE();
@@ -137,13 +139,13 @@ void dma2_UART1_rx_Init(){
 	*DMA_S2PAR = 0x40011004;
 
 	uint32_t* DMA_S2NDTR = (uint32_t*)(DMA2_ADDR + 0x14 + 0x18 * 5); //(9.5.5 in ref manual)
-	*DMA_S2NDTR =  sizeof(rx_buf);
+	*DMA_S2NDTR = 7;
 
 	uint32_t* DMA_S2M0AR = (uint32_t*)(DMA2_ADDR + 0x1C + 0x18 * 5); //(9.5.5 in ref manual)
 	*DMA_S2M0AR = rx_buf;
 
-	uint32_t* NVIC_ISER1 = (uint32_t*)(0xE000E104);
-	*NVIC_ISER1 |= (1 << 26);
+	uint32_t* NVIC_ISER2 = (uint32_t*)(0xE000E108);
+	*NVIC_ISER2 |= 1 << (68-64);
 
 	/* receive: 7 bytes data
 	 * from: UART DR
@@ -152,7 +154,11 @@ void dma2_UART1_rx_Init(){
 }
 
 void DMA2_Stream2_IRQHandler(){
-	int x;
+	__asm("NOP");
+	//clear the interrupt flag -> transfer complete interrupt (different to USART1, need to clear flag)
+	uint32_t* DMA_HIFCR = (uint32_t*)(DMA2_ADDR + 0x0C);
+	*DMA_HIFCR |= 1 << 11; //bit 11
+
 }
 
 
