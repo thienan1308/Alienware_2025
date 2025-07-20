@@ -1,0 +1,7 @@
+../Core/Src/UART.c:15:6:UART1_Init	1
+../Core/Src/UART.c:81:6:UART1_Transmit_1byte	3
+../Core/Src/UART.c:90:6:UART1_Trans_String	2
+../Core/Src/UART.c:99:6:UART1_Receive_1byte	2
+../Core/Src/UART.c:108:6:USART1_IRQHandler	3
+../Core/Src/UART.c:125:6:dma2_UART1_rx_Init	1
+../Core/Src/UART.c:154:6:DMA2_Stream2_IRQHandler	1

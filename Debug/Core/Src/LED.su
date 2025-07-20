@@ -1,0 +1,2 @@
+../Core/Src/LED.c:9:6:LEDinit	16	static
+../Core/Src/LED.c:26:6:LEDblink	16	static

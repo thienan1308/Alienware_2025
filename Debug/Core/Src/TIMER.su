@@ -1,0 +1,2 @@
+../Core/Src/TIMER.c:11:6:Timer_init	16	static
+../Core/Src/TIMER.c:21:6:delay_1s	4	static
