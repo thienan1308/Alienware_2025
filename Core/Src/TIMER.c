@@ -12,10 +12,13 @@ void Timer_init(){
 	__HAL_RCC_TIM1_CLK_ENABLE();
 	//Timer 1 second so prescaler should be 16.000.000 / 16000 = 1000xung/s
 	//Prescaler = 16000 and ARR = 1000
-	*TIM1_PSC = 16000 - 1; //Avoid to divide to 0, so the producer have set that if prescaler value is 0, the RCC is auto divide to 1. If 1, it divide to 2 and the same for others
+	*TIM1_PSC = 16 - 1; //Avoid to divide to 0, so the producer have set that if prescaler value is 0, the RCC is auto divide to 1. If 1, it divide to 2 and the same for others
 	*TIM1_ARR = 1000;
 	//Enable counter - bit 0 thanh ghi CR1
 	*TIM1_CR1 |= (1 << 0);
+
+	*NVIC_ISER0 |= (1 << 25);
+	*TIM1_CR1 |= (1 << 0); //count enable
 }
 
 void delay_1s(){
@@ -24,5 +27,15 @@ void delay_1s(){
 	*TIM1_SR &= ~(1 << 0); //CLear bit
 }
 
+int time_cnt = 0;
+
+void TIM1_UP_TIM10_IRQHandler(){
+	time_cnt++;
+	*TIM1_SR &= ~(1 << 0);
+}
+void delay(int time){
+	time_cnt = 0;
+	while(time_cnt < time);
+}
 
 

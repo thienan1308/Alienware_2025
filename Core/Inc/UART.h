@@ -13,8 +13,9 @@ void UART1_Transmit_1byte(uint8_t data);
 void UART1_Trans_String(char* msg);
 char UART1_Receive_1byte();
 void USART1_IRQHandler();
-//void UART1_rx_handler();
 void dma2_UART1_rx_Init();
 void DMA2_Stream2_IRQHandler();
+void UART_trans_float(float val);
+
 
 #endif /* INC_UART_H_ */

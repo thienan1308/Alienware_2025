@@ -1,0 +1,2 @@
+../Core/Src/ADC_temp.c:16:6:ADC1_Init	1
+../Core/Src/ADC_temp.c:23:7:ADC1_temp_meas_sens	2

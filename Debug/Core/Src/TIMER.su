@@ -1,2 +1,4 @@
 ../Core/Src/TIMER.c:11:6:Timer_init	16	static
-../Core/Src/TIMER.c:21:6:delay_1s	4	static
+../Core/Src/TIMER.c:24:6:delay_1s	4	static
+../Core/Src/TIMER.c:32:6:TIM1_UP_TIM10_IRQHandler	4	static
+../Core/Src/TIMER.c:36:6:delay	16	static

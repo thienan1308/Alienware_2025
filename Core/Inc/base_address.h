@@ -25,6 +25,8 @@
 
 #define ADC1_BASE_ADDR		0x40012000
 
+#define ADC1_BASE_ADDR 		0x40012000
+
 //Timer
 #define TIM1_BASE_ADDR		0x40010000	 //16bit
 #define TIM2_BASE_ADDR		0x40000000	 //32bit
@@ -207,6 +209,7 @@
 #define UART1_CR1 		((volatile uint32_t*)(UART1_BASE_ADDR + offset_USART1_CR1))
 #define UART1_DR 		((volatile uint32_t*)(UART1_BASE_ADDR + offset_USART1_DR))
 #define UART1_SR 		((volatile uint32_t*)(UART1_BASE_ADDR + offset_USART1_SR))
+#define UART1_CR3		((volatile uint32_t*)(UART1_BASE_ADDR + offset_USART1_CR3))
 
 //SPI1
 #define SPI1_CR1		((volatile uint32_t*)(SPI1_BASE_ADDR + offset_SPI_CR1))
@@ -241,8 +244,14 @@
 #define TIM1_DMAR		((volatile uint32_t*)(TIM1_BASE_ADDR + offset_TIM1_DMAR))
 
 //ADC
-#define ADC_JSQR		((volatile uint32_t*)(ADC1_BASE_ADDR + offset_ADC_JSQR))
-
+#define ADC1_JSQR		((volatile uint32_t*)(ADC1_BASE_ADDR + offset_ADC_JSQR))
+#define ADC1_CR1  		((volatile uint32_t*)(ADC1_BASE_ADDR + offset_ADC_CR1))
+#define ADC1_CR2 		((volatile uint32_t*)(ADC1_BASE_ADDR + offset_ADC_CR2))
+#define ADC1_SR 		((volatile uint32_t*)(ADC1_BASE_ADDR + offset_ADC_SR))
+#define ADC1_SMPR2 		((volatile uint32_t*)(ADC1_BASE_ADDR + 0x10))
+#define ADC1_CCR 		((volatile uint32_t*)(ADC1_BASE_ADDR + 0x300 + 0x04))
+#define ADC1_SMPR1 		((volatile uint32_t*)(ADC1_BASE_ADDR + 0x0C))
+#define ADC1_JDR1		((volatile uint32_t*)(ADC1_BASE_ADDR + 0x3C))
 
 #define NVIC_ISER0  	((volatile uint32_t*)(0xE000E100))
 #define my_VTOR 		((volatile uint32_t*)(0xE000ED08)) //Vector table offset register

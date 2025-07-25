@@ -1,3 +1,4 @@
+"./Core/Src/ADC_temp.o"
 "./Core/Src/Button.o"
 "./Core/Src/Flash_Eraser.o"
 "./Core/Src/I2C.o"

@@ -63,7 +63,7 @@ void UART1_Init(){
 	//Enable UART - CR1 bit 13 UE (USART enable)
 	*UART1_CR1 |= (1 << 13);
 
-#if 0
+#if 1
 	//Enable RXNE interrupt (enable su kien ngat), when RXNE is set, UART1 generate interrupt event send to nvic
 	*UART1_CR1 |= (1 << 5);
 	//NVIC approve interrupt event, which is send from UART1
@@ -72,8 +72,8 @@ void UART1_Init(){
 	*NVIC_ISER1 |= 1 << (37 - 32);
 #else
 	//when RXNE is set, send signal to DMA2, DMA2 move data to RAM
-	uint32_t* DMA_CR3 = (uint32_t*)(0x40011014);
-	*DMA_CR3 |= (1 << 6);
+	*UART1_CR3 |= (1 << 6);
+	//dma2_UART1_rx_Init();
 #endif
 }
 
@@ -93,6 +93,13 @@ void UART1_Trans_String(char* msg){
 	{
 		UART1_Transmit_1byte(msg[i]);
 	}
+}
+//Trans float to byte
+void UART_trans_float(float val){
+	char buf[12];
+	char fmt[] = "%.2f";
+	snprintf(buf, 12, fmt, val);
+	UART1_Trans_String(buf);
 }
 
 //To send data from computer to uart
@@ -122,42 +129,49 @@ void USART1_IRQHandler(){
 
 }
 
-char rx_buf[100];
+char rx_buf[7];
 #define DMA2_ADDR 0x40026400
 void dma2_UART1_rx_Init(){
 	__HAL_RCC_DMA2_CLK_ENABLE();
-	//Using DMA2,  stream 2, channel 4 (table 28, ref manual for DMA)
-	uint32_t* DMA_S2CR = (uint32_t*)(DMA2_ADDR + 0x10 + 0x18 * 5); //(9.5.5 in ref manual)
-	*DMA_S2CR &= ~ (0b111 << 25);
-	*DMA_S2CR |= (0b100 << 25); //Select channel 4 for stream 2
-	*DMA_S2CR |= (1 << 10); //Enable memory increment mode
-	*DMA_S2CR |= (1 << 8);
-	*DMA_S2CR |= (1 << 4); //Enable transfer complete interrupt
-	*DMA_S2CR |= (1 << 0); //Enable stream 2
+	//dia chi nguoi nhan
+	uint32_t* DMA_S2M0AR = (uint32_t*)(DMA2_ADDR + 0x1C + 0x18 *2);
+	*DMA_S2M0AR = recei_data;
 
-	uint32_t* DMA_S2PAR = (uint32_t*)(DMA2_ADDR + 0x18 + 0x18 * 5); //(9.5.5 in ref manual)
+	//dia chi nguoi gui
+	uint32_t* DMA_S2PAR = (uint32_t*)(DMA2_ADDR + 0x18 + 0x18 *2);
 	*DMA_S2PAR = 0x40011004;
 
-	uint32_t* DMA_S2NDTR = (uint32_t*)(DMA2_ADDR + 0x14 + 0x18 * 5); //(9.5.5 in ref manual)
+	//kich thuoc goi hang
+	uint32_t* DMA_S2NDTR = (uint32_t*)(DMA2_ADDR + 0x14 + 0x18 *2);
 	*DMA_S2NDTR = 7;
 
-	uint32_t* DMA_S2M0AR = (uint32_t*)(DMA2_ADDR + 0x1C + 0x18 * 5); //(9.5.5 in ref manual)
-	*DMA_S2M0AR = rx_buf;
+	//enable DMA2, stream 2, channel 4
+	uint32_t* DMA_S2CR = (uint32_t*)(DMA2_ADDR + 0x10 + 0x18 *2);
+	*DMA_S2CR &= ~(0b111 << 25);
+	*DMA_S2CR |= (0b100 << 25);  //select channel 4 for stream 2
+	*DMA_S2CR |= (1 << 10);		//MEMORY increment mode
+	*DMA_S2CR |= (1 << 8);
+	*DMA_S2CR |= (1 << 0); //enable stream 2
 
-	uint32_t* NVIC_ISER2 = (uint32_t*)(0xE000E108);
-	*NVIC_ISER2 |= 1 << (68-64);
 
-	/* receive: 7 bytes data
-	 * from: UART DR
-	 * to: receive_data (0x2000
-	 */
 }
 
 void DMA2_Stream2_IRQHandler(){
 	__asm("NOP");
 	//clear the interrupt flag -> transfer complete interrupt (different to USART1, need to clear flag)
 	uint32_t* DMA_HIFCR = (uint32_t*)(DMA2_ADDR + 0x0C);
-	*DMA_HIFCR |= 1 << 11; //bit 11
+	*DMA_HIFCR |= (1 << 11); //bit 11
+	if(strstr(recei_data, "LED ON ") != NULL)
+	{
+		LEDblink(1, LED3_pin);
+		memset(recei_data, 0, 7);
+	}
+	else if(strstr(recei_data, "LED OFF") != NULL)
+	{
+		LEDblink(0, LED3_pin);
+		memset(recei_data, 0, 7);
+	}
+
 
 }
 

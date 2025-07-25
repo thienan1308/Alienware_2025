@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<stdint.h>
 #include"LED.h"
 #include"Button.h"
 #include"Interrupt.h"
@@ -6,6 +7,8 @@
 #include"SPI.h"
 #include"Flash_Eraser.h"
 #include"string.h"
+
+#include"ADC_temp.h"
 int cnt = 1000;
 
 
@@ -60,7 +63,8 @@ void function(){
 //	idx = 0;
 //}
 
-
+//ADC_temp
+float temp;
 int main(){
 	LEDinit();
 	HAL_Init();
@@ -70,6 +74,20 @@ int main(){
 	SPI_Init();
 	Timer_init();
 	dma2_UART1_rx_Init();
+	ADC1_Init();
+
+	//ADC1_temp
+	while(1){
+		LEDblink(1, LED4_pin);
+		HAL_Delay(500);
+		LEDblink(0, LED4_pin);
+		HAL_Delay(500);
+		temp = ADC1_temp_meas_sens();
+		UART_trans_float(temp);
+		UART1_Trans_String("\r\n");
+	}
+	return 0;
+
 /*
 	//Timer
 	while(1){
@@ -91,29 +109,26 @@ int main(){
 
 	//UART1
 
-	while(1){
+//	while(1){
 //		if(UART1_Receive_1byte() == 'a')
 //			LEDblink(1, LED3_pin);
 //		else if (UART1_Receive_1byte() == 'b')
 //			LEDblink(0, LED3_pin);  //cau 1
 
+//
+//		LEDblink(1, LED4_pin);
+//		HAL_Delay(1000);
+//		LEDblink(0, LED4_pin);
+//		HAL_Delay(1000);
 
-		LEDblink(1, LED4_pin);
-		HAL_Delay(1000);
-		LEDblink(0, LED4_pin);
-		HAL_Delay(1000);
-
-
-
-		//UART1_Transmit_1byte('a');
-		/*UART1_Trans_String("hello word\r\n");
-		LEDblink(1, LED3_pin);
-		HAL_Delay(cnt);
+		//UART1_Trans_String("hello word\r\n");
+//		LEDblink(1, LED3_pin);
+//		HAL_Delay(cnt);
 		//LEDblink(0, LED3_pin);
 		//HAL_Delay(1000);
-		 */
-	}
-	return 0;
+//
+//	}
+//	return 0;
 
 /*
 	//SPI
